@@ -1,0 +1,36 @@
+# smart shades control
+
+1) prerequisites
+	1 - a raspberry pi (or a compatible device)
+	2 - a bluetooth 4.0+ adapter with bluetooth low energy support (raspberry pi 3 has blue built in)
+	3 - a sd card with at least 2 GiB of space and a sd card reader/writer
+
+2) setting up the raspberry pi
+	1 - download the lite version of the raspian linux distribution 
+			https://www.raspberrypi.org/downloads/raspbian/
+	2 - format the sd card (quick format is sufficient)
+	3 - open the archive and write the raspian image file to the sd card 
+			windows:	http://elinux.org/RPi_Easy_SD_Card_Setup#Flashing_the_SD_Card_using_Windows
+			mac osx:	http://elinux.org/RPi_Easy_SD_Card_Setup#Flashing_the_SD_card_using_Mac_OS_X
+			linux:		http://elinux.org/RPi_Easy_SD_Card_Setup#Flashing_the_SD_Card_using_Linux_.28including_on_a_Raspberry_Pi.21.29
+	4 - insert the sd card to the raspberry pi and power the device
+	5 - wait for the operating system to load
+	6 - attach a keyboard and a screen or ssh to the raspberry pi
+		the default login credentials are 
+			username: pi
+			password: raspberry
+	7 - sudo apt-get update
+		sudo apt-get upgrade
+		sudo apt-get install bluez 
+		(	if bluez is not available in the package repository or does not contain all required tools {hcitool, gatttool}, 
+			instructions on how to install it can be found at: http://www.elinux.org/RPi_Bluetooth_LE#BlueZ_installation    )
+	8 - enable the bluetooth adapter:	sudo hciconfig hci0 up
+	9 - scan for ble devices:			sudo hcitool lescan
+	10-	use the provided script to execute commands on the peripheral (sudo is required, launch the python script with the --help option to receive usage instructions)
+
+3) services & characteristics
+
+	battery service uuid:				0000180f-0000-1000-8000-00805f9b34fb 	battery value characteristic:		00002a19-0000-1000-8000-00805f9b34fb    [returns battery value in percentage format, 0-100]
+ 	motor service uuid:					00001861-B87F-490C-92CB-11BA5EA5167C 	motor state value characteristic:	00001525-B87F-490C-92CB-11BA5EA5167C    [returns an array, the first value is the motor position in percentage] 	motor control characteristic:		00001530-B87F-490C-92CB-11BA5EA5167C    [write 0x69 to move up, 0x96 to move down]
+
+
