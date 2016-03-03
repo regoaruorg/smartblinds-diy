@@ -4,6 +4,7 @@
 	1 - a raspberry pi (or a compatible device)
 	2 - a bluetooth 4.0+ adapter with bluetooth low energy support (raspberry pi 3 has blue built in)
 	3 - a sd card with at least 2 GiB of space and a sd card reader/writer
+	4 - a smart shades peripheral that has been previously configured with the app
 
 2) setting up the raspberry pi
 	1 - download the lite version of the raspian linux distribution 
@@ -25,7 +26,7 @@
 		(	if bluez is not available in the package repository or does not contain all required tools {hcitool, gatttool}, 
 			instructions on how to install it can be found at: http://www.elinux.org/RPi_Bluetooth_LE#BlueZ_installation    )
 	8 - enable the bluetooth adapter:	sudo hciconfig hci0 up
-	9 - scan for ble devices:			sudo hcitool lescan
+	9 - scan for ble devices (smart shades devices are named RISExxx):		sudo hcitool lescan
 	10-	use the provided script to execute commands on the peripheral (sudo is required, launch the python script with the --help option to receive usage instructions)
 
 3) services & characteristics
