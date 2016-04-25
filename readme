@@ -37,3 +37,11 @@
  	motor state value characteristic:	00001525-B87F-490C-92CB-11BA5EA5167C    [returns an array, the first value is the motor position in percentage]
  	motor control characteristic:		00001530-B87F-490C-92CB-11BA5EA5167C    [write 0x69 to move up, 0x96 to move down]
  	motor value characteristic:         00001526-B87F-490C-92CB-11BA5EA5167C    [write 0x00 - 0x69, (0 - 100 represented as % in base10)]
+
+4) Examples
+
+	sudo python control.py -t [device's MAC] -c get_battery					[prints out the device's current battery level]
+	sudo python control.py -t [device's MAC] -c get_position				[prints out the device's current position]
+	sudo python control.py -t [device's MAC] -c move_up						[moves the device to its highest position]
+	sudo python control.py -t [device's MAC] -c move_down					[moves the device to its lowest position]
+	sudo python control.py -t [device's MAC] -c move_target -a [position]	[moves the device to the specified position with 0 being the highest and 100 the lowest position]
